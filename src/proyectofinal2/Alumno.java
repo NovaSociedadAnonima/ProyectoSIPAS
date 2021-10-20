@@ -1,12 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package proyectofinal2;
 
-
+/**
+ *
+ * @author Santi
+ */
 public class Alumno {
      String Nombre;
     String Apellido;
     private int CI;
    
-
+public Alumno(String Nombre,String Apellido,int CI){
+   this.Nombre=Nombre;
+    this.Apellido=Apellido;
+    this.CI=CI;
+  
+    
+}
  
     public String getNombre() {
         return Nombre;
