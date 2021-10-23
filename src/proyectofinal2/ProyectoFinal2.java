@@ -54,68 +54,85 @@ public class ProyectoFinal2 {
     }
 
     public static void IngresoDeAdmin() {
-        int cortador1 = 0;
-        int cortador2 = 0;
+        
+        //ETO TA CHECKEADO
+        
+        
+ //       int cortador1 = 0;
+ //       int cortador2 = 0;
+          int user;
+          int pass;
 
-        while (cortador1 == 0) {
+//        while (cortador1 == 0) {
             System.out.println("Ingrese el usuario de admin");
-            if (Tl.nextInt() == UsuarioAdmin) {
+            user = Tl.nextInt();
+            if (user == UsuarioAdmin) {
                 System.out.println("Usuario correcto");
-                cortador1++;
-
-            }
-            if (Tl.nextInt() != UsuarioAdmin) {
-                System.out.println("Usuario incorrecto");
-
-            }
-
-        }
-        while (cortador2 == 0) {
+               // cortador1++;
+                
             System.out.println("Ingrese el contraseña de admin");
-            if (Tl.nextInt() == ContraseñaAdmin) {
-                System.out.println("contraseña correcto");
-                cortador2++;
+            pass = Tl.nextInt();
+            if (pass == ContraseñaAdmin) {
+                System.out.println("Contraseña correcta");
+               // cortador2++;
+                
+                Admin();
 
             }
-            if (Tl.nextInt() != ContraseñaAdmin) {
-                System.out.println("contraseña incorrecto");
+            if (pass != ContraseñaAdmin) {
+                System.out.println("Contraseña Incorrecta");
+                IngresoDeAdmin();
 
             }
 
-        }
-        Admin();
+            }
+            if (user != UsuarioAdmin) {
+                System.out.println("Usuario incorrecto");
+                IngresoDeAdmin();
+
+            }
+//        }
+//       while (cortador2 == 0) {
+
+//        }
     }
 
     public static void IngresoDeDocente() {
-        int cortador1 = 0;
-        int cortador2 = 0;
+    //    int cortador1 = 0;
+    //    int cortador2 = 0;
 
-        while (cortador1 == 0) {
+          int user;
+          int pass;
+          
+    //    while (cortador1 == 0) {
             System.out.println("Ingrese el usuario de docente");
-
-            if (UsuarioGeneralDocente == Tl.nextInt()) {
+            user = Tl.nextInt();
+            if (UsuarioGeneralDocente == user) {
                 System.out.println("Usuario correcto");
-                cortador1++;
+                //cortador1++;
 
-            }
-            if (UsuarioGeneralDocente != Tl.nextInt()) {
-                System.out.println("contraseña incorrecto");
-
-            }
-        }
-
-        while (cortador2 == 0) {
             System.out.println("Ingrese el Contraseña de docente");
-            if (Tl.nextInt() == ContraseñaUsuario) {
+            
+            pass = Tl.nextInt();
+            
+            if (pass == ContraseñaUsuario) {
                 System.out.println("Contraseña correcta");
-                cortador2++;
+               // cortador2++;
             }
-            if (Tl.nextInt() != ContraseñaUsuario) {
+            if (pass != ContraseñaUsuario) {
                 System.out.println("contraseña incorrecta");
 
             }
+            }
+            if (UsuarioGeneralDocente != user) {
+                System.out.println("Usuario incorrecto");
 
-        }
+            }
+    //    }
+
+    //    while (cortador2 == 0) {
+
+    //    }
         MenuDocente();
     }
 
@@ -124,6 +141,10 @@ public class ProyectoFinal2 {
     }
 
     public static void MenuDocente() {
+        
+        
+        //CHECKEADO
+        
         System.out.println("Para pasar lista ingrese [1]");
         System.out.println("Para mostrar lista de alumnos completa ingrese [2]");
         switch (Tl.nextInt()) {
@@ -191,13 +212,21 @@ public class ProyectoFinal2 {
         AlumnoN.setApellido(Tl.next());
         System.out.println("Ingrese la cedula del alumno a ingresar");
         AlumnoN.setCI(Tl.nextInt());
-        System.out.println("Desearia ingresarlo en un curso ya creado[1],ingresarlo en un nuevo cursos[2] o no ingresarlo en ningun curso");
-//        switch(Tl.nextInt()){
-//           // case 1:IngresandoAluCursoCreado();
-//            break;
-//            case 2:NuevoCursoIngresandoAlum();
-//            break;
-//            case 3:System.out.println("Alumno registrado en alumnos globales");Admin();
+        System.out.println("Desearia ingresarlo en un curso ya creado? \n"
+                         + "[1]: Ingresarlo en un nuevo cursos \n"
+                         + "[2] o no ingresarlo en ningun curso");
+          switch(Tl.nextInt()){
+          case 1:
+          //IngresandoAluCursoCreado();
+          break;
+          case 2:
+          //NuevoCursoIngresandoAlum();
+          break;
+          case 3:
+          System.out.println("Alumno registrado en alumnos globales");
+          Admin();
+          break;
+    }
     }
 
     public static void IngresandoProfesores() {
