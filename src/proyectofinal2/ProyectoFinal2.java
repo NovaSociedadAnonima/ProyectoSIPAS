@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyectofinal2;
 
 import java.awt.AWTException;
@@ -18,7 +14,7 @@ public class ProyectoFinal2 {
     public static Scanner Tl = new Scanner(System.in);
 
     public static Alumno AlumnoN = new Alumno("santiago", "soto", 1234);
-    public static Profesor ProfesorN = new Profesor();
+    public static Profesor ProfesorN = new Profesor("s", "s", 1);
 
     public static Curso CursoN = new Curso(123, "Informatica", 2);
 
@@ -28,13 +24,7 @@ public class ProyectoFinal2 {
 
     public static void main(String[] args) throws InterruptedException, AWTException {
         //Mini datos de prueba
-        Alumno Alumn = new Alumno("Nacho", "Ghan", 123);
-        Alumnos.add(Alumn);
-        Alumnos.add(AlumnoN);
-        Curso Curso3 = new Curso(124, "Deporte(Monos)", 3);
-        Cursos.add(CursoN);
-        Cursos.add(Curso3);
-        Cursos.get(0).setAlumnos(Alumnos);
+        IngresoDatosPrueba();
         MenuPrincipal();
 
     }
@@ -54,28 +44,19 @@ public class ProyectoFinal2 {
     }
 
     public static void IngresoDeAdmin() {
-        
-        //ETO TA CHECKEADO
-        
-        
- //       int cortador1 = 0;
- //       int cortador2 = 0;
-          int user;
-          int pass;
+        int user;
+        int pass;
 
-//        while (cortador1 == 0) {
-            System.out.println("Ingrese el usuario de admin");
-            user = Tl.nextInt();
-            if (user == UsuarioAdmin) {
-                System.out.println("Usuario correcto");
-               // cortador1++;
-                
+        System.out.println("Ingrese el usuario de admin");
+        user = Tl.nextInt();
+        if (user == UsuarioAdmin) {
+            System.out.println("Usuario correcto");
+
             System.out.println("Ingrese el contraseña de admin");
             pass = Tl.nextInt();
             if (pass == ContraseñaAdmin) {
                 System.out.println("Contraseña correcta");
-               // cortador2++;
-                
+
                 Admin();
 
             }
@@ -85,55 +66,45 @@ public class ProyectoFinal2 {
 
             }
 
-            }
-            if (user != UsuarioAdmin) {
-                System.out.println("Usuario incorrecto");
-                IngresoDeAdmin();
+        }
+        if (user != UsuarioAdmin) {
+            System.out.println("Usuario incorrecto");
+            IngresoDeAdmin();
 
-            }
-//        }
-//       while (cortador2 == 0) {
+        }
 
-//        }
     }
 
     public static void IngresoDeDocente() {
-    //    int cortador1 = 0;
-    //    int cortador2 = 0;
 
-          int user;
-          int pass;
-          
-    //    while (cortador1 == 0) {
-            System.out.println("Ingrese el usuario de docente");
-            user = Tl.nextInt();
-            if (UsuarioGeneralDocente == user) {
-                System.out.println("Usuario correcto");
-                //cortador1++;
+        int user;
+        int pass;
+
+        System.out.println("Ingrese el usuario de docente");
+        user = Tl.nextInt();
+        if (UsuarioGeneralDocente == user) {
+            System.out.println("Usuario correcto");
 
             System.out.println("Ingrese el Contraseña de docente");
-            
+
             pass = Tl.nextInt();
-            
+
             if (pass == ContraseñaUsuario) {
                 System.out.println("Contraseña correcta");
-               // cortador2++;
+
             }
             if (pass != ContraseñaUsuario) {
                 System.out.println("contraseña incorrecta");
 
             }
-            }
-            if (UsuarioGeneralDocente != user) {
-                System.out.println("Usuario incorrecto");
+        }
+        if (UsuarioGeneralDocente != user) {
+            System.out.println("Usuario incorrecto");
 
-            }
-    //    }
+        }
 
-    //    while (cortador2 == 0) {
-
-    //    }
         MenuDocente();
+
     }
 
     public static void Admin() {
@@ -141,10 +112,6 @@ public class ProyectoFinal2 {
     }
 
     public static void MenuDocente() {
-        
-        
-        //CHECKEADO
-        
         System.out.println("Para pasar lista ingrese [1]");
         System.out.println("Para mostrar lista de alumnos completa ingrese [2]");
         switch (Tl.nextInt()) {
@@ -158,7 +125,74 @@ public class ProyectoFinal2 {
     }
 
     public static void PasandoLista() {
+        System.out.println("#################");
+        System.out.println("Lista de cursos");
+        System.out.println("#################");
+        for (int i = 0; i < Cursos.size(); i++) {
+            System.out.println("Nombre de curso:" + Cursos.get(i).getNombreCurso() + "  #####ID:" + Cursos.get(i).getIdCurso());
 
+        }
+        System.out.println("Ingrese ID de lista a pasar");
+        int Ing;
+        Ing = Tl.nextInt();
+        int DireccionCurs = 0;
+        for (int i = 0; i < Cursos.size(); i++) {
+            if (Cursos.get(i).getIdCurso() == Ing) {
+                DireccionCurs = i;
+
+            }
+
+        }
+        String MateriaP;
+        System.out.println("Ingrese nombre de materia a pasar lista");
+        MateriaP = Tl.next();
+        int DireMateriaC = 0;
+        int DireMateriaM = 0;
+        for (int i = 0; i < Cursos.size(); i++) {
+            for (int j = 0; j < Cursos.get(i).getMaterias().size(); j++) {
+                if (Cursos.get(i).getMaterias().get(j).getNombre().equals(MateriaP)) {
+                    DireMateriaC = i;
+                    DireMateriaM = j;
+                }
+            }
+
+        }
+        System.out.println("#################");
+        System.out.println("Alumnos en el curso");
+        System.out.println("#################");
+        for (int i = 0; i < Cursos.get(DireccionCurs).getAlumnos().size(); i++) {
+            System.out.println("Nombre: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getNombre() + " #Apellido: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getApellido() + " ###CI:" + Cursos.get(DireccionCurs).getAlumnos().get(i).getCI());
+
+        }
+        int cortador = 1;
+        int p;
+        System.out.println("Si estan todos presentes ingrese 1 y si faltan ingrese 2");
+        p = Tl.nextInt();
+        if (p == 2) {
+            while (cortador == 1) {
+                System.out.println("Ingrese Ci de los alumnos que no estan presentes");
+                Ing = Tl.nextInt();
+                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
+                System.out.println("Si quiere ingresar mas alumnos faltantes ingrese 1 y si no ingrese 0");
+                Ing = Tl.nextInt();
+                if (Ing == 0) {
+                    cortador++;
+                }
+            }
+        }
+        System.out.println("#################");
+        System.out.println("Alumnos faltantes");
+        System.out.println("#################");
+        for (int i = 0; i < Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().size(); i++) {
+            for (int j = 0; j < 10; j++) {
+                //               if(Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i)== Alumnos.get(j).getCI()){
+
+                //#################################
+                //###########IMPORTANTE###########
+                //#####Hoy a las 18 lo sigo#######
+                //#################################
+            }
+        }
     }
 
     public static void MostrandoListaCompleta() {
@@ -183,7 +217,7 @@ public class ProyectoFinal2 {
         System.out.println("Alumnos en el curso");
         System.out.println("#################");
         for (int i = 0; i < Cursos.get(DireccionCurs).getAlumnos().size(); i++) {
-            System.out.println("Nombre: "+Cursos.get(DireccionCurs).getAlumnos().get(i).getNombre()+" #Apellido: "+Cursos.get(DireccionCurs).getAlumnos().get(i).getApellido());
+            System.out.println("Nombre: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getNombre() + " #Apellido: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getApellido());
         }
     }
 
@@ -212,21 +246,13 @@ public class ProyectoFinal2 {
         AlumnoN.setApellido(Tl.next());
         System.out.println("Ingrese la cedula del alumno a ingresar");
         AlumnoN.setCI(Tl.nextInt());
-        System.out.println("Desearia ingresarlo en un curso ya creado? \n"
-                         + "[1]: Ingresarlo en un nuevo cursos \n"
-                         + "[2] o no ingresarlo en ningun curso");
-          switch(Tl.nextInt()){
-          case 1:
-          //IngresandoAluCursoCreado();
-          break;
-          case 2:
-          //NuevoCursoIngresandoAlum();
-          break;
-          case 3:
-          System.out.println("Alumno registrado en alumnos globales");
-          Admin();
-          break;
-    }
+        System.out.println("Desearia ingresarlo en un curso ya creado[1],ingresarlo en un nuevo cursos[2] o no ingresarlo en ningun curso");
+//        switch(Tl.nextInt()){
+//           // case 1:IngresandoAluCursoCreado();
+//            break;
+//            case 2:NuevoCursoIngresandoAlum();
+//            break;
+//            case 3:System.out.println("Alumno registrado en alumnos globales");Admin();
     }
 
     public static void IngresandoProfesores() {
@@ -269,4 +295,32 @@ public class ProyectoFinal2 {
 
     }
 
+    public static void IngresoDatosPrueba() {
+        //Alumnos
+        Alumno Alumn = new Alumno("Esteban", "Quito", 5439);
+        Alumno Alumn2 = new Alumno("Paula", "Soto", 17653);
+        Alumno Alumn3 = new Alumno("Julieta", "Garcia", 7223);
+        Alumno Alumn4 = new Alumno("Yuumi", "Morales", 1543);
+        Alumno Alumn5 = new Alumno("kevin", "Sosa", 1673);
+        Alumno Alumn6 = new Alumno("Manuel", "Soso", 12293);
+        Alumnos.add(Alumn);
+        Alumnos.add(Alumn2);
+        Alumnos.add(Alumn3);
+        Alumnos.add(Alumn4);
+        Alumnos.add(Alumn5);
+        Alumnos.add(Alumn6);
+        Alumnos.add(AlumnoN);
+        //Cursos
+        Curso Curso3 = new Curso(124, "Deporte(Monos)", 3);
+        Cursos.add(CursoN);
+        Cursos.add(Curso3);
+        Cursos.get(0).setAlumnos(Alumnos);
+        //Profesores
+        Profesor NewProfe = new Profesor("Sebastian", "Torres", 1553);
+        Profesor NewProfe2 = new Profesor("Natalia", "Torres", 5131);
+        //Materias
+        Materia NewMateria = new Materia("Programacion", NewProfe);
+        Materia NewMateria2 = new Materia("Sistemas Operativos", NewProfe2);
+
+    }
 }

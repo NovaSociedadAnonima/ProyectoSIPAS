@@ -8,6 +8,7 @@ class Curso {
     private String NombreCurso;
     private int GradoCurso;
     private ArrayList<Alumno> Alumnos = new ArrayList<>();
+    private ArrayList<Materia> Materias = new ArrayList<>();
 
     public Curso(int IdCurso, String NombreCurso, int GradoCurso) {
         this.IdCurso = IdCurso;
@@ -46,6 +47,14 @@ class Curso {
 
     public void setAlumnos(ArrayList<Alumno> Alumnos) {
         this.Alumnos = Alumnos;
+    }
+
+    public ArrayList<Materia> getMaterias() {
+        return Materias;
+    }
+
+    public void setMaterias(ArrayList<Materia> Materias) {
+        this.Materias = Materias;
     }
 
 }
