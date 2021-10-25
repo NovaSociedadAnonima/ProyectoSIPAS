@@ -21,7 +21,7 @@ public class ProyectoFinal2 {
     public static ArrayList<Curso> Cursos = new ArrayList<>();
     public static ArrayList<Alumno> Alumnos = new ArrayList<>();
     public static ArrayList<Profesor> Profesores = new ArrayList<>();
-
+    public static ArrayList<Materia> Materias = new ArrayList<>();
     public static void main(String[] args) throws InterruptedException, AWTException {
         //Mini datos de prueba
         IngresoDatosPrueba();
@@ -321,6 +321,7 @@ public class ProyectoFinal2 {
         //Materias
         Materia NewMateria = new Materia("Programacion", NewProfe);
         Materia NewMateria2 = new Materia("Sistemas Operativos", NewProfe2);
-
+        Materias.add(NewMateria);
+        Materias.add(NewMateria2);
     }
 }
