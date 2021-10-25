@@ -7,7 +7,7 @@ public class Materia {
     private String Nombre;
     private Profesor ProfesorE;
 
-    private ArrayList NoPresentes = new ArrayList();
+    private ArrayList<Alumno> NoPresentes = new ArrayList<>(); //FIXED (creo) después decime -Fabri
 
     public Materia(String Nombre, Profesor ProfesorE) {
         this.Nombre = Nombre;
@@ -31,11 +31,11 @@ public class Materia {
         this.ProfesorE = ProfesorE;
     }
 
-    public ArrayList getNoPresentes() {
+    public ArrayList<Alumno> getNoPresentes() {
         return NoPresentes;
     }
 
-    public void setNoPresentes(ArrayList NoPresentes) {
+    public void setNoPresentes(ArrayList<Alumno> NoPresentes) {
         this.NoPresentes = NoPresentes;
     }
 
