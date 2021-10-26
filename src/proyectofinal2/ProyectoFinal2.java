@@ -244,6 +244,7 @@ public class ProyectoFinal2 {
     }
 
     public static void IngresandoAlumnos() {
+        int op = 0;
         System.out.println("Ingrese el nombre del alumno a ingresar");
         AlumnoN.setNombre(Tl.next());
         System.out.println("Ingrese el apellido del alumno a ingresar");
@@ -257,6 +258,13 @@ public class ProyectoFinal2 {
 //            case 2:NuevoCursoIngresandoAlum();
 //            break;
 //            case 3:System.out.println("Alumno registrado en alumnos globales");Admin();
+
+//Creo que esto es lo que querés hacer no?
+        if(op == 1){
+            Alumnos.add(AlumnoN);
+        }
+        
+//sigue
     }
 
     public static void IngresandoProfesores() {
