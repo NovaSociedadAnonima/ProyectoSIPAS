@@ -261,20 +261,24 @@ public class ProyectoFinal2 {
 
     public static void IngresandoProfesores() {
         int cortador = 1;
+        int op;
         while (cortador == 1) {
-            System.out.println("Ingrese el nombre del alumno a ingresar");
+            System.out.println("Ingrese el nombre del profesor a ingresar");
             ProfesorN.setNombre(Tl.next());
-            System.out.println("Ingrese el apellido del alumno a ingresar");
+            System.out.println("Ingrese el apellido del profesor a ingresar");
             ProfesorN.setApellido(Tl.next());
-            System.out.println("Ingrese la cedula del alumno a ingresar");
+            System.out.println("Ingrese la cedula del profesor a ingresar");
             ProfesorN.setCi(Tl.nextInt());
             System.out.println("Para ingresar mas profesor ingrese 1 y para no ingresar mas ingrese 0");
-            if (Tl.nextInt() == 1) {
+            op = Tl.nextInt();
+            if (op == 1) {
                 Profesores.add(ProfesorN);
                 cortador++;
                 MenuAdmin();
-            } else if (Tl.nextInt() == 0) {
+            }
+            if (op == 0) {
                 Profesores.add(ProfesorN);
+                MenuAdmin(); //faltó esto
             }
         }
     }
@@ -286,16 +290,12 @@ public class ProyectoFinal2 {
         
         int cortador = 1;
         int op; //variable de sc
-        String nomcurso;
-        int gcurso;
         while (cortador == 1) {
             System.out.println("ingrese el nombre del curso");
-            nomcurso = Tl.next();
-            CursoN.setNombreCurso(nomcurso);
+            CursoN.setNombreCurso(Tl.next());
             
             System.out.println("ingrese GCurso");
-            gcurso = Tl.nextInt();
-            CursoN.setGradoCurso(gcurso);
+            CursoN.setGradoCurso(Tl.nextInt());
 
             System.out.println("Para ingresar mas Cursos ingrese 1 y para no ingresar mas ingrese 0");
             
