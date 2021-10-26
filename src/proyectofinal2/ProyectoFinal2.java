@@ -172,7 +172,8 @@ public class ProyectoFinal2 {
             while (cortador == 1) {
                 System.out.println("Ingrese Ci de los alumnos que no estan presentes");
                 Ing = Tl.nextInt();
-                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
+                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
+              //Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);
                 System.out.println("Si quiere ingresar mas alumnos faltantes ingrese 1 y si no ingrese 0");
                 Ing = Tl.nextInt();
                 if (Ing == 0) {
