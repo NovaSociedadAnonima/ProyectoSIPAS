@@ -194,6 +194,7 @@ public class ProyectoFinal2 {
                 //#################################
                 
                 //esto fue ayer no? XD
+                //Otra cosa. No veo cuando la condición de cuando la variable p (scanner) es 1
             }
         }
     }
