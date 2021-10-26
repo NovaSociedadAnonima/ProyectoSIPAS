@@ -280,20 +280,35 @@ public class ProyectoFinal2 {
     }
 
     public static void IngresandoCurso() {
+        
+        //ARREGLADO
+        
+        
         int cortador = 1;
+        int op; //variable de sc
+        String nomcurso;
+        int gcurso;
         while (cortador == 1) {
             System.out.println("ingrese el nombre del curso");
-            CursoN.setNombreCurso(Tl.next());
+            nomcurso = Tl.next();
+            CursoN.setNombreCurso(nomcurso);
+            
             System.out.println("ingrese GCurso");
-            CursoN.setGradoCurso(Tl.nextInt());
+            gcurso = Tl.nextInt();
+            CursoN.setGradoCurso(gcurso);
 
             System.out.println("Para ingresar mas Cursos ingrese 1 y para no ingresar mas ingrese 0");
-            if (Tl.nextInt() == 1) {
+            
+            op = Tl.nextInt();
+            
+            if (op == 1) {
                 Cursos.add(CursoN);
                 cortador++;
                 MenuAdmin();
-            } else if (Tl.nextInt() == 0) {
+            } 
+            if (op == 0) {
                 Cursos.add(CursoN);
+                MenuAdmin(); //te faltó esto
             }
         }
 
