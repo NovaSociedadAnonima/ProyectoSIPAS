@@ -189,9 +189,11 @@ public class ProyectoFinal2 {
                 //               if(Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i)== Alumnos.get(j).getCI()){
 
                 //#################################
-                //###########IMPORTANTE###########
-                //#####Hoy a las 18 lo sigo#######
+                //###########IMPORTANTE############
+                //#####Hoy a las 18 lo sigo########
                 //#################################
+                
+                //esto fue ayer no? XD
             }
         }
     }
