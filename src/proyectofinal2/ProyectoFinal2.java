@@ -1,4 +1,3 @@
-
 package proyectofinal2;
 
 import java.awt.AWTException;
@@ -22,9 +21,11 @@ public class ProyectoFinal2 {
     public static ArrayList<Alumno> Alumnos = new ArrayList<>();
     public static ArrayList<Profesor> Profesores = new ArrayList<>();
     public static ArrayList<Materia> Materias = new ArrayList<>();
+
     public static void main(String[] args) throws InterruptedException, AWTException {
         //Mini datos de prueba
         IngresoDatosPrueba();
+
         MenuPrincipal();
 
     }
@@ -148,6 +149,7 @@ public class ProyectoFinal2 {
         MateriaP = Tl.next();
         int DireMateriaC = 0;
         int DireMateriaM = 0;
+
         for (int i = 0; i < Cursos.size(); i++) {
             for (int j = 0; j < Cursos.get(i).getMaterias().size(); j++) {
                 if (Cursos.get(i).getMaterias().get(j).getNombre().equals(MateriaP)) {
@@ -157,6 +159,7 @@ public class ProyectoFinal2 {
             }
 
         }
+
         System.out.println("#################");
         System.out.println("Alumnos en el curso");
         System.out.println("#################");
@@ -168,12 +171,12 @@ public class ProyectoFinal2 {
         int p;
         System.out.println("Si estan todos presentes ingrese 1 y si faltan ingrese 2");
         p = Tl.nextInt();
+
         if (p == 2) {
             while (cortador == 1) {
                 System.out.println("Ingrese Ci de los alumnos que no estan presentes");
                 Ing = Tl.nextInt();
-                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
-              //Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);
+                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
                 System.out.println("Si quiere ingresar mas alumnos faltantes ingrese 1 y si no ingrese 0");
                 Ing = Tl.nextInt();
                 if (Ing == 0) {
@@ -181,21 +184,17 @@ public class ProyectoFinal2 {
                 }
             }
         }
+        for (int i = 0; i < 2; i++) {
+            System.out.println(Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i));
+            System.out.println("s");
+        }
         System.out.println("#################");
         System.out.println("Alumnos faltantes");
         System.out.println("#################");
         for (int i = 0; i < Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().size(); i++) {
-            for (int j = 0; j < 10; j++) {
-                //               if(Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i)== Alumnos.get(j).getCI()){
 
-                //#################################
-                //###########IMPORTANTE############
-                //#####Hoy a las 18 lo sigo########
-                //#################################
-                
-                //esto fue ayer no? XD
-                //Otra cosa. No veo cuando la condición de cuando la variable p (scanner) es 1
-            }
+            //if (Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i).equals(121)) {
+            //  }
         }
     }
 
@@ -244,79 +243,71 @@ public class ProyectoFinal2 {
     }
 
     public static void IngresandoAlumnos() {
-        int op = 0;
         System.out.println("Ingrese el nombre del alumno a ingresar");
         AlumnoN.setNombre(Tl.next());
         System.out.println("Ingrese el apellido del alumno a ingresar");
         AlumnoN.setApellido(Tl.next());
         System.out.println("Ingrese la cedula del alumno a ingresar");
         AlumnoN.setCI(Tl.nextInt());
-        System.out.println("Desearia ingresarlo en un curso ya creado[1],ingresarlo en un nuevo cursos[2] o no ingresarlo en ningun curso");
-//        switch(Tl.nextInt()){
-//           // case 1:IngresandoAluCursoCreado();
-//            break;
-//            case 2:NuevoCursoIngresandoAlum();
-//            break;
-//            case 3:System.out.println("Alumno registrado en alumnos globales");Admin();
+        int d = 0;
 
-//Creo que esto es lo que querés hacer no?
-        if(op == 1){
-            Alumnos.add(AlumnoN);
+        System.out.println("Ingrese el Id del curso donde desea ingresarlo");
+        d = Tl.nextInt();
+        for (int i = 0; i < Cursos.size(); i++) {
+            if (Cursos.get(i).getIdCurso() == d) {
+                Cursos.get(i).getAlumnos().add(AlumnoN);
+                System.out.println("El alumno fue ingresado con exito al curso");
+            }
         }
-        
-//sigue
+
     }
 
     public static void IngresandoProfesores() {
         int cortador = 1;
-        int op;
         while (cortador == 1) {
-            System.out.println("Ingrese el nombre del profesor a ingresar");
+            System.out.println("Ingrese el nombre del alumno a ingresar");
             ProfesorN.setNombre(Tl.next());
-            System.out.println("Ingrese el apellido del profesor a ingresar");
+            System.out.println("Ingrese el apellido del alumno a ingresar");
             ProfesorN.setApellido(Tl.next());
-            System.out.println("Ingrese la cedula del profesor a ingresar");
+            System.out.println("Ingrese la cedula del alumno a ingresar");
             ProfesorN.setCi(Tl.nextInt());
+            for (int i = 0; i < Materias.size(); i++) {
+                System.out.println("Nombre de materia" + Materias.get(i).getNombre());
+            }
+            String g = "s";
+            System.out.println("Ingrese el nombre de la materia que va a dar");
+            g = Tl.next();
+            for (int i = 0; i < Materias.size(); i++) {
+                if (Materias.get(i).getNombre().equals(g)) {
+                    Materias.get(i).setProfesorE(ProfesorN);
+                }
+            }
             System.out.println("Para ingresar mas profesor ingrese 1 y para no ingresar mas ingrese 0");
-            op = Tl.nextInt();
-            if (op == 1) {
+            if (Tl.nextInt() == 1) {
                 Profesores.add(ProfesorN);
                 cortador++;
                 MenuAdmin();
-            }
-            if (op == 0) {
+            } else if (Tl.nextInt() == 0) {
                 Profesores.add(ProfesorN);
-                MenuAdmin(); //faltó esto
             }
         }
     }
 
     public static void IngresandoCurso() {
-        
-        //ARREGLADO
-        
-        
         int cortador = 1;
-        int op; //variable de sc
         while (cortador == 1) {
             System.out.println("ingrese el nombre del curso");
             CursoN.setNombreCurso(Tl.next());
-            
             System.out.println("ingrese GCurso");
             CursoN.setGradoCurso(Tl.nextInt());
 
             System.out.println("Para ingresar mas Cursos ingrese 1 y para no ingresar mas ingrese 0");
-            
-            op = Tl.nextInt();
-            
-            if (op == 1) {
+            if (Tl.nextInt() == 1) {
                 Cursos.add(CursoN);
                 cortador++;
                 MenuAdmin();
-            } 
-            if (op == 0) {
+            } else if (Tl.nextInt() == 0) {
                 Cursos.add(CursoN);
-                MenuAdmin(); //te faltó esto
             }
         }
 
@@ -345,10 +336,15 @@ public class ProyectoFinal2 {
         //Profesores
         Profesor NewProfe = new Profesor("Sebastian", "Torres", 1553);
         Profesor NewProfe2 = new Profesor("Natalia", "Torres", 5131);
+        Profesor NewProfe3 = new Profesor("Gaston", "Gonzales", 1213);
+
         //Materias
-        Materia NewMateria = new Materia("Programacion", NewProfe);
-        Materia NewMateria2 = new Materia("Sistemas Operativos", NewProfe2);
-        Materias.add(NewMateria);
-        Materias.add(NewMateria2);
+        Materia NewMateria = new Materia("Programacion", NewProfe, 123);
+        Materia NewMateria2 = new Materia("Sistemas Operativos", NewProfe2, 123);
+        Materia NewMateria3 = new Materia("EduFisica", NewProfe3, 124);
+        Cursos.get(0).getMaterias().add(NewMateria);
+        Cursos.get(0).getMaterias().add(NewMateria2);
+        Cursos.get(1).getMaterias().add(NewMateria3);
     }
 }
+
