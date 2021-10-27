@@ -1,10 +1,10 @@
-package proyectofinal2;
+package ProyectoFinAño;
 
 import java.awt.AWTException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class ProyectoFinal2 {
+public class ProyectoFinAño {
 
     public static int UsuarioAdmin = 1234;
     public static int ContraseñaAdmin = 1234;
@@ -115,6 +115,7 @@ public class ProyectoFinal2 {
     public static void MenuDocente() {
         System.out.println("Para pasar lista ingrese [1]");
         System.out.println("Para mostrar lista de alumnos completa ingrese [2]");
+        System.out.println("Ingresar llegada tarde de alumno");
         switch (Tl.nextInt()) {
             case 1:
                 PasandoLista();
@@ -122,7 +123,35 @@ public class ProyectoFinal2 {
             case 2:
                 MostrandoListaCompleta();
                 break;
+            case 3:
+                IngresoLlegadaTarde();
+                break;
         }
+    }
+
+    public static void IngresoLlegadaTarde() {
+        String MateriaTarde;
+        int AluLlegoTarde;
+        int Lm;
+        System.out.println("Ingrese el nombre de la materia a la que se llego tarde");
+        MateriaTarde = Tl.next();
+        System.out.println("Ingrese la Ci del alumno que llego tarde ");
+        AluLlegoTarde = Tl.nextInt();
+        for (int i = 0; i < Materias.size(); i++) {
+            if (Materias.get(i).getNombre().equals(MateriaTarde)) {
+                Lm = i;
+            }
+        }
+//        for (int i = 0; i < Materias.size(); i++) {
+//            for (int j = 0; j < Materias.size(); j++) {
+//                 if(Materias.get(i).getNoPresentes().get(j)==MateriaTarde){
+//                     Materias.get(i).getNoPresentes().get(j)
+//                 }
+//            }
+//           
+//        }
+
+//Lo sigo cuando llegue a casa
     }
 
     public static void PasandoLista() {
@@ -176,7 +205,7 @@ public class ProyectoFinal2 {
             while (cortador == 1) {
                 System.out.println("Ingrese Ci de los alumnos que no estan presentes");
                 Ing = Tl.nextInt();
-                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
+////                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
                 System.out.println("Si quiere ingresar mas alumnos faltantes ingrese 1 y si no ingrese 0");
                 Ing = Tl.nextInt();
                 if (Ing == 0) {
@@ -345,6 +374,7 @@ public class ProyectoFinal2 {
         Cursos.get(0).getMaterias().add(NewMateria);
         Cursos.get(0).getMaterias().add(NewMateria2);
         Cursos.get(1).getMaterias().add(NewMateria3);
+
     }
 }
 
