@@ -4,17 +4,25 @@ import java.util.ArrayList;
 
 public class Materia {
 
+    
+    private int IdCurso;
     private String Nombre;
     private Profesor ProfesorE;
 
-    private ArrayList<Alumno> NoPresentes = new ArrayList<>(); //FIXED (creo) después decime -Fabri
+    private ArrayList<Integer> NoPresentes = new ArrayList();
 
-    public Materia(String Nombre, Profesor ProfesorE) {
+    public Materia(String Nombre, Profesor ProfesorE, int IdCurso) {
         this.Nombre = Nombre;
         this.ProfesorE = ProfesorE;
-
+        this.IdCurso = IdCurso;
+    }
+public int getIdCurso() {
+        return IdCurso;
     }
 
+    public void setIdCurso(int IdCurso) {
+        this.IdCurso = IdCurso;
+    }
     public String getNombre() {
         return Nombre;
     }
@@ -31,11 +39,11 @@ public class Materia {
         this.ProfesorE = ProfesorE;
     }
 
-    public ArrayList<Alumno> getNoPresentes() {
+    public ArrayList getNoPresentes() {
         return NoPresentes;
     }
 
-    public void setNoPresentes(ArrayList<Alumno> NoPresentes) {
+    public void setNoPresentes(ArrayList NoPresentes) {
         this.NoPresentes = NoPresentes;
     }
 
