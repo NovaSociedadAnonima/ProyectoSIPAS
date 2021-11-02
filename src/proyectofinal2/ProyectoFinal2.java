@@ -1,10 +1,10 @@
-package ProyectoFinAño;
+package proyectofinal2;
 
 import java.awt.AWTException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class ProyectoFinAño {
+public class ProyectoFinal2 {
 
     public static int UsuarioAdmin = 1234;
     public static int ContraseñaAdmin = 1234;
@@ -14,7 +14,7 @@ public class ProyectoFinAño {
 
     public static Alumno AlumnoN = new Alumno("santiago", "soto", 1234);
     public static Profesor ProfesorN = new Profesor("s", "s", 1);
-
+    public static Materia MateriaN = new Materia("a", ProfesorN, 1);
     public static Curso CursoN = new Curso(123, "Informatica", 2);
 
     public static ArrayList<Curso> Cursos = new ArrayList<>();
@@ -112,10 +112,22 @@ public class ProyectoFinAño {
         MenuAdmin();
     }
 
+    public static void MostrandoAlumnos(int ID) {
+        int a = 0;
+        for (int i = 0; i < Cursos.size(); i++) {
+            if (Cursos.get(i).getIdCurso() == ID) {
+                a = i;
+            }
+        }
+        for (int i = 0; i < Cursos.get(a).getMaterias().size(); i++) {
+            System.out.println("Nombre:" + Cursos.get(a).getAlumnos().get(i).getNombre() + " Apellido:" + Cursos.get(a).getAlumnos().get(i).getApellido() + " #CI:" + Cursos.get(a).getAlumnos().get(i).getCI());
+        }
+    }
+
     public static void MenuDocente() {
         System.out.println("Para pasar lista ingrese [1]");
         System.out.println("Para mostrar lista de alumnos completa ingrese [2]");
-        System.out.println("Ingresar llegada tarde de alumno");
+        System.out.println("Para volver al menu principal [3]");
         switch (Tl.nextInt()) {
             case 1:
                 PasandoLista();
@@ -124,117 +136,79 @@ public class ProyectoFinAño {
                 MostrandoListaCompleta();
                 break;
             case 3:
-                IngresoLlegadaTarde();
-                break;
+                MenuPrincipal();
         }
-    }
-
-    public static void IngresoLlegadaTarde() {
-        String MateriaTarde;
-        int AluLlegoTarde;
-        int Lm;
-        System.out.println("Ingrese el nombre de la materia a la que se llego tarde");
-        MateriaTarde = Tl.next();
-        System.out.println("Ingrese la Ci del alumno que llego tarde ");
-        AluLlegoTarde = Tl.nextInt();
-        for (int i = 0; i < Materias.size(); i++) {
-            if (Materias.get(i).getNombre().equals(MateriaTarde)) {
-                Lm = i;
-            }
-        }
-//        for (int i = 0; i < Materias.size(); i++) {
-//            for (int j = 0; j < Materias.size(); j++) {
-//                 if(Materias.get(i).getNoPresentes().get(j)==MateriaTarde){
-//                     Materias.get(i).getNoPresentes().get(j)
-//                 }
-//            }
-//           
-//        }
-
-//Lo sigo cuando llegue a casa
     }
 
     public static void PasandoLista() {
+        int cc = 0;
+        MostrandoCursos();
+        System.out.println("Ingrese ID de lista a pasar");
+        int Ing;
+        Ing = Tl.nextInt();
+        //Busco la posicion del curso
+        int LCurso = 0;
+        for (int i = 0; i < Cursos.size(); i++) {
+            if (Cursos.get(i).getIdCurso() == Ing) {
+                LCurso = i;
+            }
+        }
+        MostrandoMaterias(LCurso);
+        String NombreMateria;
+        System.out.println("Ingrese el nombre de la materia a pasar lista");
+        NombreMateria = Tl.next();
+        int cortador = 1;
+
+        //Busco la materia a la que quiere pasarse la lista
+        int LMateria = 0;
+        for (int i = 0; i < Cursos.get(LCurso).getMaterias().size(); i++) {
+            if (Cursos.get(LCurso).getMaterias().get(i).getNombre().equals(NombreMateria)) {
+                LMateria = i;
+            }
+        }
+        ArrayList NoPresentes2 = new ArrayList();
+        String alumFalt;
+        while (cortador == 1) {
+            for (int i = 0; i < Cursos.get(LCurso).getMaterias().size(); i++) {
+                System.out.println("Nombre:" + Cursos.get(LCurso).getAlumnos().get(i).getNombre() + " Apellido:" + Cursos.get(LCurso).getAlumnos().get(i).getApellido() + " #CI:" + Cursos.get(LCurso).getAlumnos().get(i).getCI());
+            }
+            System.out.println("Ingrese la nombre del alumno faltante");
+            alumFalt = Tl.next();
+            int LAlmunF = 0;
+            for (int i = 0; i < Alumnos.size(); i++) {
+                if (Alumnos.get(i).getNombre().equals(alumFalt)) {
+                    LAlmunF = i;
+                }
+            }
+            System.out.println("Si desea ingresar ingresar otro alumno faltante ingrese 1 y si no quiere ingrese 2");
+            switch (Tl.nextInt()) {
+                case 1:
+                    Cursos.get(LCurso).getMaterias().get(LMateria).getAlumnosFaltantes().add(Alumnos.get(LAlmunF));
+                    break;
+                case 2:
+                    cortador++;
+                    Cursos.get(LCurso).getMaterias().get(LMateria).getAlumnosFaltantes().add(Alumnos.get(LAlmunF));
+                    break;
+            }
+
+        }
+        System.out.println("Todas las faltas de los alumnos faltantes fueron ingresadas con exito");
+        System.out.println("##################");
+        MenuDocente();
+    }
+
+    public static void MostrandoCursos() {
         System.out.println("#################");
         System.out.println("Lista de cursos");
         System.out.println("#################");
         for (int i = 0; i < Cursos.size(); i++) {
             System.out.println("Nombre de curso:" + Cursos.get(i).getNombreCurso() + "  #####ID:" + Cursos.get(i).getIdCurso());
 
-        }
-        System.out.println("Ingrese ID de lista a pasar");
-        int Ing;
-        Ing = Tl.nextInt();
-        int DireccionCurs = 0;
-        for (int i = 0; i < Cursos.size(); i++) {
-            if (Cursos.get(i).getIdCurso() == Ing) {
-                DireccionCurs = i;
-
-            }
-
-        }
-        String MateriaP;
-        System.out.println("Ingrese nombre de materia a pasar lista");
-        MateriaP = Tl.next();
-        int DireMateriaC = 0;
-        int DireMateriaM = 0;
-
-        for (int i = 0; i < Cursos.size(); i++) {
-            for (int j = 0; j < Cursos.get(i).getMaterias().size(); j++) {
-                if (Cursos.get(i).getMaterias().get(j).getNombre().equals(MateriaP)) {
-                    DireMateriaC = i;
-                    DireMateriaM = j;
-                }
-            }
-
-        }
-
-        System.out.println("#################");
-        System.out.println("Alumnos en el curso");
-        System.out.println("#################");
-        for (int i = 0; i < Cursos.get(DireccionCurs).getAlumnos().size(); i++) {
-            System.out.println("Nombre: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getNombre() + " #Apellido: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getApellido() + " ###CI:" + Cursos.get(DireccionCurs).getAlumnos().get(i).getCI());
-
-        }
-        int cortador = 1;
-        int p;
-        System.out.println("Si estan todos presentes ingrese 1 y si faltan ingrese 2");
-        p = Tl.nextInt();
-
-        if (p == 2) {
-            while (cortador == 1) {
-                System.out.println("Ingrese Ci de los alumnos que no estan presentes");
-                Ing = Tl.nextInt();
-////                Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().add(Ing);   //Se como arreglarlo pero estoy probando otra cosa,luego lo cambio
-                System.out.println("Si quiere ingresar mas alumnos faltantes ingrese 1 y si no ingrese 0");
-                Ing = Tl.nextInt();
-                if (Ing == 0) {
-                    cortador++;
-                }
-            }
-        }
-        for (int i = 0; i < 2; i++) {
-            System.out.println(Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i));
-            System.out.println("s");
-        }
-        System.out.println("#################");
-        System.out.println("Alumnos faltantes");
-        System.out.println("#################");
-        for (int i = 0; i < Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().size(); i++) {
-
-            //if (Cursos.get(DireMateriaC).getMaterias().get(DireMateriaM).getNoPresentes().get(i).equals(121)) {
-            //  }
         }
     }
 
     public static void MostrandoListaCompleta() {
-        System.out.println("#################");
-        System.out.println("Lista de cursos");
-        System.out.println("#################");
-        for (int i = 0; i < Cursos.size(); i++) {
-            System.out.println("Nombre de curso:" + Cursos.get(i).getNombreCurso() + "  #####ID:" + Cursos.get(i).getIdCurso());
-
-        }
+        MostrandoCursos();
         System.out.println("Ingrese ID de lista a mostrar");
         int Ing;
         Ing = Tl.nextInt();
@@ -251,13 +225,16 @@ public class ProyectoFinAño {
         for (int i = 0; i < Cursos.get(DireccionCurs).getAlumnos().size(); i++) {
             System.out.println("Nombre: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getNombre() + " #Apellido: " + Cursos.get(DireccionCurs).getAlumnos().get(i).getApellido());
         }
+        System.out.println("##################");
+        MenuDocente();
     }
 
     public static void MenuAdmin() {
 
-        System.out.println("Para ingresar alumnos ingrese 1");
-        System.out.println("Para ingresar Profesor ingrese 2");
-        System.out.println("Para agregar un nuevo curso desde cero ingrese 3");
+        System.out.println("Para ingresar alumnos ingrese [1]");
+        System.out.println("Para ingresar Profesor ingrese [2]");
+        System.out.println("Para agregar un nuevo curso desde cero ingrese [3]");
+        System.out.println("Para volver al menu principal [5]");
         switch (Tl.nextInt()) {
             case 1:
                 IngresandoAlumnos();
@@ -268,7 +245,44 @@ public class ProyectoFinAño {
             case 3:
                 IngresandoCurso();
                 break;
+            case 4:
+                IngresandoMateria();
+            case 5:
+                MenuPrincipal();
         }
+    }
+
+    public static void IngresandoMateria() {
+        String a;
+        System.out.println("Ingrese el nombre de la materia");
+        MateriaN.setNombre(Tl.next());
+        System.out.println("Ingrese nombre del profesor que la va a dar(Si el profesor es nuevo ingrese 1 y si  ya existe ingrese 0");
+        switch (Tl.nextInt()) {
+            case 1:
+                System.out.println("Ingrese el nombre del Profesor a ingresar");
+                ProfesorN.setNombre(Tl.next());
+                System.out.println("Ingrese el apellido del Profesor a ingresar");
+                ProfesorN.setApellido(Tl.next());
+                System.out.println("Ingrese la cedula del Profesor a ingresar");
+                ProfesorN.setCi(Tl.nextInt());
+                Profesores.add(ProfesorN);
+                MateriaN.setProfesorE(ProfesorN);
+                break;
+            case 2:
+                System.out.println("Ingrese el nombre del profesor que quiere ingresar");
+                a = Tl.next();
+                for (int i = 0; i < Profesores.size(); i++) {
+                    if (Profesores.get(i).getNombre().equals(a)) {
+                        MateriaN.setProfesorE(Profesores.get(i));
+                    }
+                }
+                break;
+        }
+        System.out.println("Ingrese el id del curso al cual pertenece");
+        MostrandoCursos();
+        MateriaN.setIdCurso(Tl.nextInt());
+        System.out.println("####################");
+        MenuAdmin();
     }
 
     public static void IngresandoAlumnos() {
@@ -288,38 +302,40 @@ public class ProyectoFinAño {
                 System.out.println("El alumno fue ingresado con exito al curso");
             }
         }
+        System.out.println("##################");
+        MenuAdmin();
+    }
 
+    public static void MostrandoMaterias(int IdCurso) {
+        for (int i = 0; i < Cursos.get(IdCurso).getMaterias().size(); i++) {
+            System.out.println("Nombre de materia: " + Cursos.get(IdCurso).getMaterias().get(i).getNombre());
+        }
     }
 
     public static void IngresandoProfesores() {
-        int cortador = 1;
-        while (cortador == 1) {
-            System.out.println("Ingrese el nombre del alumno a ingresar");
-            ProfesorN.setNombre(Tl.next());
-            System.out.println("Ingrese el apellido del alumno a ingresar");
-            ProfesorN.setApellido(Tl.next());
-            System.out.println("Ingrese la cedula del alumno a ingresar");
-            ProfesorN.setCi(Tl.nextInt());
-            for (int i = 0; i < Materias.size(); i++) {
-                System.out.println("Nombre de materia" + Materias.get(i).getNombre());
-            }
-            String g = "s";
-            System.out.println("Ingrese el nombre de la materia que va a dar");
-            g = Tl.next();
-            for (int i = 0; i < Materias.size(); i++) {
-                if (Materias.get(i).getNombre().equals(g)) {
-                    Materias.get(i).setProfesorE(ProfesorN);
-                }
-            }
-            System.out.println("Para ingresar mas profesor ingrese 1 y para no ingresar mas ingrese 0");
-            if (Tl.nextInt() == 1) {
-                Profesores.add(ProfesorN);
-                cortador++;
-                MenuAdmin();
-            } else if (Tl.nextInt() == 0) {
-                Profesores.add(ProfesorN);
+
+        System.out.println("Ingrese el nombre del Profesor a ingresar");
+        ProfesorN.setNombre(Tl.next());
+        System.out.println("Ingrese el apellido del Profesor a ingresar");
+        ProfesorN.setApellido(Tl.next());
+        System.out.println("Ingrese la cedula del Profesor a ingresar");
+        ProfesorN.setCi(Tl.nextInt());
+        for (int i = 0; i < Materias.size(); i++) {
+            System.out.println("Nombre de materia" + Materias.get(i).getNombre());
+        }
+        String g = "s";
+        System.out.println("Ingrese el nombre de la materia que va a dar");
+        g = Tl.next();
+        for (int i = 0; i < Materias.size(); i++) {
+            if (Materias.get(i).getNombre().equals(g)) {
+                Materias.get(i).setProfesorE(ProfesorN);
             }
         }
+        System.out.println("El docente con su respectiva materia fue ingresado correctamente");
+
+        System.out.println("################");
+        MenuAdmin();
+
     }
 
     public static void IngresandoCurso() {
@@ -333,13 +349,15 @@ public class ProyectoFinAño {
             System.out.println("Para ingresar mas Cursos ingrese 1 y para no ingresar mas ingrese 0");
             if (Tl.nextInt() == 1) {
                 Cursos.add(CursoN);
-                cortador++;
+
                 MenuAdmin();
             } else if (Tl.nextInt() == 0) {
                 Cursos.add(CursoN);
+                cortador++;
             }
         }
-
+        System.out.println("################");
+        MenuAdmin();
     }
 
     public static void IngresoDatosPrueba() {
@@ -374,7 +392,5 @@ public class ProyectoFinAño {
         Cursos.get(0).getMaterias().add(NewMateria);
         Cursos.get(0).getMaterias().add(NewMateria2);
         Cursos.get(1).getMaterias().add(NewMateria3);
-
     }
 }
-
