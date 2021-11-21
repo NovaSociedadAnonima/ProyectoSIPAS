@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ProyectoFinal2 {
 
-    public static int UsuarioAdmin = 1234;
+    public static int UsuarioAdmin = 1111;
     public static int ContraseñaAdmin = 1234;
     public static int UsuarioGeneralDocente = 1234;
     public static int ContraseñaUsuario = 1234;
